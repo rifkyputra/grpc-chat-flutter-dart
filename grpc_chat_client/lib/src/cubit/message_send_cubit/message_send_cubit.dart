@@ -1,0 +1,3 @@
+class MessageSendCubit extends Cubit<> {
+  
+}

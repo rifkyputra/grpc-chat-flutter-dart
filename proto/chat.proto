@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+service ChatMessagingService {
+
+    rpc Subscribe(SubscribeRequest) returns (stream MessageResponse);
+
+    rpc SendMessage(MessageRequest) returns (Empty);
+
+}
+
+message Empty {
+
+}
+
+message MessageRequest {
+    string username = 1;
+    string message =2;
+    string toChannel =3;
+}
+
+message SubscribeRequest {
+    string channel = 1;
+    string username = 2;
+}
+
+message MessageResponse {
+    string fromUsername =1;
+    string message =2;
+    string fromChannel =3;
+}

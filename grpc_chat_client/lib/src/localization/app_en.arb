@@ -1,0 +1,6 @@
+{
+  "appTitle": "grpc_chat_client",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
