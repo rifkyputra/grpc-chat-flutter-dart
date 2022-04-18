@@ -1,3 +1,6 @@
-void main(List<String> arguments) {
-  print('Hello world!');
+import 'package:grpc/grpc.dart';
+import '../lib/main.dart' as server;
+
+void main(List<String> arguments) async {
+  server.main();
 }

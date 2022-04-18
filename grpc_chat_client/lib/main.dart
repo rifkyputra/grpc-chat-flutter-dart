@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
+import 'package:grpc_chat_client/proto/chat.pbgrpc.dart';
 
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
@@ -28,4 +30,16 @@ void main() async {
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
   runApp(MyApp(settingsController: settingsController));
+}
+
+class EnvConfig {
+  static const int grpcPort = int.fromEnvironment(
+    'GRPC_PORT',
+    defaultValue: 54242,
+  );
+
+  static const String grpcAddress = String.fromEnvironment(
+    'GRPC_ADDR',
+    defaultValue: 'localhost',
+  );
 }

@@ -15,7 +15,6 @@ message Empty {
 message MessageRequest {
     string username = 1;
     string message =2;
-    string toChannel =3;
 }
 
 message SubscribeRequest {
@@ -24,7 +23,8 @@ message SubscribeRequest {
 }
 
 message MessageResponse {
-    string fromUsername =1;
-    string message =2;
-    string fromChannel =3;
+    string id=1;
+    string fromUsername =2;
+    string message =3;
+    int64 dateEpoch=5;
 }

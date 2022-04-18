@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:grpc_chat_client/src/cubit/app_cubit/app_cubit.dart';
+import 'package:grpc_chat_client/src/cubit/message_incoming_cubit/message_incoming_cubit.dart';
+import 'package:grpc_chat_client/src/cubit/message_send_cubit/message_send_cubit.dart';
 
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
@@ -81,5 +85,24 @@ class MyApp extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class MyAppProviderWrapper extends StatelessWidget {
+  const MyAppProviderWrapper({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(providers: [
+      BlocProvider(
+        create: (context) => MessageIncomingCubit(initialState),
+      ),
+      BlocProvider(
+        create: (context) => MessageSendCubit(initialState),
+      ),
+      BlocProvider(
+        create: (context) => AppCubit(initialState),
+      ),
+    ], child: child)
   }
 }
