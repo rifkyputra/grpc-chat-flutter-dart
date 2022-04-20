@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "On Emulator (Debug Dev)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "flutterMode": "debug",
+            "args": [
+                "--dart-define=GRPC_PORT=54242",
+                "--dart-define=GRPC_ADDR=10.0.2.2"
+            ]
+        },
+        {
+            "name": "On Device (Debug Dev)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "flutterMode": "debug",
+            "args": [
+                "--dart-define=GRPC_PORT=54242",
+                "--dart-define=GRPC_ADDR=192.168.1.2"
+            ]
+        }
+    ]
+}

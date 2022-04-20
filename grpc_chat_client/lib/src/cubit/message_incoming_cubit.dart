@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:grpc/grpc.dart';
-import 'package:grpc_chat_client/proto/chat.pb.dart';
 import 'package:grpc_chat_client/proto/chat.pbgrpc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
@@ -14,13 +13,14 @@ class MessageIncomingCubit extends HydratedCubit<MessageData> {
 
   final ChatMessagingServiceClient grpcClient;
 
-  StreamSubscription? chatSubscription;
-  ResponseStream? responseStream;
+  StreamSubscription? _chatSubscription;
+  ResponseStream? _responseStream;
 
-  void subscribe(String channel, String username) async {
-    responseStream ??= grpcClient.subscribe(SubscribeRequest());
+  void subscribe(String username) async {
+    _responseStream ??=
+        grpcClient.subscribe(SubscribeRequest(username: username));
 
-    chatSubscription ??= responseStream?.listen((response) {
+    _chatSubscription ??= _responseStream?.listen((response) {
       _addToState(response);
     });
   }
@@ -28,7 +28,7 @@ class MessageIncomingCubit extends HydratedCubit<MessageData> {
   void _addToState(MessageResponse response) async {
     emit(MessageData(messages: [
       ...state.messages,
-      ChatBubble(
+      ChatMessage(
         id: response.id,
         message: response.message,
         time: DateTime.fromMillisecondsSinceEpoch(response.dateEpoch.toInt()),
@@ -42,7 +42,8 @@ class MessageIncomingCubit extends HydratedCubit<MessageData> {
     final decoded = json.decode(map['messages']);
 
     return MessageData(
-        messages: [for (var item in decoded) ChatBubble.fromJson(item)]);
+      messages: [for (var item in decoded) ChatMessage.fromJson(item)],
+    );
   }
 
   @override
@@ -54,7 +55,7 @@ class MessageIncomingCubit extends HydratedCubit<MessageData> {
 }
 
 class MessageData extends Equatable {
-  final List<ChatBubble> messages;
+  final List<ChatMessage> messages;
 
   const MessageData({this.messages = const []});
 
@@ -64,13 +65,13 @@ class MessageData extends Equatable {
       ];
 }
 
-class ChatBubble extends Equatable {
+class ChatMessage extends Equatable {
   final String id;
   final String message;
   final DateTime time;
   final String username;
 
-  const ChatBubble({
+  const ChatMessage({
     required this.id,
     required this.message,
     required this.time,
@@ -81,16 +82,16 @@ class ChatBubble extends Equatable {
     return {
       'id': id,
       'message': message,
-      'time': time,
+      'time': time.millisecondsSinceEpoch,
       'username': username,
     };
   }
 
   static fromJson(Map map) {
-    ChatBubble(
+    return ChatMessage(
       id: map['id'],
       message: map['message'],
-      time: map['time'],
+      time: DateTime.fromMillisecondsSinceEpoch(map['time']),
       username: map['username'],
     );
   }

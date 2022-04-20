@@ -43,7 +43,6 @@ class MessageRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageRequest', createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
-    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'toChannel', protoName: 'toChannel')
     ..hasRequiredFields = false
   ;
 
@@ -51,7 +50,6 @@ class MessageRequest extends $pb.GeneratedMessage {
   factory MessageRequest({
     $core.String? username,
     $core.String? message,
-    $core.String? toChannel,
   }) {
     final _result = create();
     if (username != null) {
@@ -59,9 +57,6 @@ class MessageRequest extends $pb.GeneratedMessage {
     }
     if (message != null) {
       _result.message = message;
-    }
-    if (toChannel != null) {
-      _result.toChannel = toChannel;
     }
     return _result;
   }
@@ -103,33 +98,19 @@ class MessageRequest extends $pb.GeneratedMessage {
   $core.bool hasMessage() => $_has(1);
   @$pb.TagNumber(2)
   void clearMessage() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get toChannel => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set toChannel($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasToChannel() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearToChannel() => clearField(3);
 }
 
 class SubscribeRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SubscribeRequest', createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'channel')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
     ..hasRequiredFields = false
   ;
 
   SubscribeRequest._() : super();
   factory SubscribeRequest({
-    $core.String? channel,
     $core.String? username,
   }) {
     final _result = create();
-    if (channel != null) {
-      _result.channel = channel;
-    }
     if (username != null) {
       _result.username = username;
     }
@@ -156,21 +137,12 @@ class SubscribeRequest extends $pb.GeneratedMessage {
   static SubscribeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubscribeRequest>(create);
   static SubscribeRequest? _defaultInstance;
 
-  @$pb.TagNumber(1)
-  $core.String get channel => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set channel($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasChannel() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearChannel() => clearField(1);
-
   @$pb.TagNumber(2)
-  $core.String get username => $_getSZ(1);
+  $core.String get username => $_getSZ(0);
   @$pb.TagNumber(2)
-  set username($core.String v) { $_setString(1, v); }
+  set username($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(2)
-  $core.bool hasUsername() => $_has(1);
+  $core.bool hasUsername() => $_has(0);
   @$pb.TagNumber(2)
   void clearUsername() => clearField(2);
 }
@@ -180,7 +152,6 @@ class MessageResponse extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fromUsername', protoName: 'fromUsername')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fromChannel', protoName: 'fromChannel')
     ..aInt64(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dateEpoch', protoName: 'dateEpoch')
     ..hasRequiredFields = false
   ;
@@ -190,7 +161,6 @@ class MessageResponse extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? fromUsername,
     $core.String? message,
-    $core.String? fromChannel,
     $fixnum.Int64? dateEpoch,
   }) {
     final _result = create();
@@ -202,9 +172,6 @@ class MessageResponse extends $pb.GeneratedMessage {
     }
     if (message != null) {
       _result.message = message;
-    }
-    if (fromChannel != null) {
-      _result.fromChannel = fromChannel;
     }
     if (dateEpoch != null) {
       _result.dateEpoch = dateEpoch;
@@ -259,21 +226,12 @@ class MessageResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearMessage() => clearField(3);
 
-  @$pb.TagNumber(4)
-  $core.String get fromChannel => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set fromChannel($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasFromChannel() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearFromChannel() => clearField(4);
-
   @$pb.TagNumber(5)
-  $fixnum.Int64 get dateEpoch => $_getI64(4);
+  $fixnum.Int64 get dateEpoch => $_getI64(3);
   @$pb.TagNumber(5)
-  set dateEpoch($fixnum.Int64 v) { $_setInt64(4, v); }
+  set dateEpoch($fixnum.Int64 v) { $_setInt64(3, v); }
   @$pb.TagNumber(5)
-  $core.bool hasDateEpoch() => $_has(4);
+  $core.bool hasDateEpoch() => $_has(3);
   @$pb.TagNumber(5)
   void clearDateEpoch() => clearField(5);
 }

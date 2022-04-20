@@ -18,7 +18,6 @@ message MessageRequest {
 }
 
 message SubscribeRequest {
-    string channel = 1;
     string username = 2;
 }
 

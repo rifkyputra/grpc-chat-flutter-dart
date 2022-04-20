@@ -30,6 +30,7 @@ class ChatService extends ChatMessagingServiceBase {
     ServiceCall call,
     MessageRequest request,
   ) async {
+    print(request.message);
     if (users.contains(request.username)) {
       chatStream.sink.add(request);
     }

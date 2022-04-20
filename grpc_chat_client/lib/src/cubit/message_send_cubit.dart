@@ -4,13 +4,24 @@ import 'package:grpc_chat_client/proto/chat.pbgrpc.dart';
 class MessageSendCubit extends Cubit<MessageSendState> {
   MessageSendCubit({
     required this.grpcClient,
-  }) : super(MessageSendState());
+  }) : super(MessageSendState.none);
 
   final ChatMessagingServiceClient grpcClient;
 
   void sendMessage(MessageRequest message) async {
-    await grpcClient.sendMessage(message);
+    try {
+      await grpcClient.sendMessage(message);
+      emit(MessageSendState.success);
+    } catch (e) {
+      emit(MessageSendState.failed);
+    }
+
+    emit(MessageSendState.none);
   }
 }
 
-class MessageSendState {}
+enum MessageSendState {
+  success,
+  failed,
+  none,
+}
